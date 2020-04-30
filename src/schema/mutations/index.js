@@ -1,16 +1,23 @@
-const { GraphQLObjectType, GraphQLNonNull, GraphQLString } = require("graphql");
+const {
+  GraphQLObjectType,
+  GraphQLNonNull,
+  GraphQLString,
+  GraphQLInt,
+} = require("graphql");
 
-const MessageType = require("./../types/MessageType");
-const MessageResolver = require("./../resolvers/MessageResolver");
+const TaskType = require("./../types/TaskType");
+const TaskResolver = require("./../resolvers/Task");
 const rootMutation = new GraphQLObjectType({
   name: "RootMutationType",
   fields: {
-    changeName: {
-      type: MessageType,
+    addTask: {
+      type: TaskType,
       args: {
-        name: { type: new GraphQLNonNull(GraphQLString) },
+        title: { type: new GraphQLNonNull(GraphQLString) },
+        description: { type: GraphQLString },
+        status: { type: new GraphQLNonNull(GraphQLInt) },
       },
-      resolve: MessageResolver.changeName,
+      resolve: TaskResolver.addTask,
     },
   },
 });

@@ -1,6 +1,6 @@
 const { GraphQLObjectType, GraphQLList } = require("graphql");
 
-const taskQueryResolver = require("./../resolvers/TaskQuery");
+const taskResolver = require("./../resolvers/Task");
 
 const TaskType = require("./../types/TaskType");
 
@@ -9,7 +9,7 @@ const rootQuery = new GraphQLObjectType({
   fields: {
     tasks: {
       type: new GraphQLList(TaskType),
-      resolve: taskQueryResolver.getAllTasks,
+      resolve: taskResolver.getAllTasks,
     },
   },
 });

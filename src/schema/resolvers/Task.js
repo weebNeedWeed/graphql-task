@@ -18,6 +18,20 @@ exports.addTask = async function (root, args) {
     title,
   });
   await newTask.save();
+};
 
-  return newTask;
+exports.deleteTask = async function (root, { id }) {
+  const deletion = await taskModel.deleteOne({ _id: id });
+
+  if (deletion.deletedCount === 0) {
+    throw new Error("can not find task with id " + id);
+  }
+};
+
+exports.updateTask = async function (root, args) {
+  const updation = await taskModel.updateOne({ _id: args.id }, { ...args });
+
+  if (updation.nModified === 0) {
+    throw new Error("can not find task with id " + args.id);
+  }
 };
